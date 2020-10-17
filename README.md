@@ -20,7 +20,7 @@ The grid system rows and column has all be created dynamically without inputting
 
 
 # How to access?
-The website can be found at the following address: https://github.com/Seni82/work-day-scheduler
+The website can be found at the following address: https://seni82.github.io/work-day-scheduler/
 
 
 # Website Screenshots:
