@@ -29,6 +29,9 @@ The website can be found at the following address: https://seni82.github.io/work
 !["Main Website Page"](./Screenshots/mainPage.jpg?raw=true  "Website Main Page.")
 
 
+# No longer have any issues as issues identified with time comparison has now been fixed.
 
-# Issues:
+# Previous Issues:
 I am not pleased yet with the time comparison as I believe there are better ways of doing the time comparison. (I will look into improving this.)
+
+
