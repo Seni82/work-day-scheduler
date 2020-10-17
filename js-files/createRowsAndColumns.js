@@ -1,104 +1,118 @@
 //array of working hour time.
-const workingHours = ['9AM', '10AM','11AM','12PM','1PM','2PM','3PM','4PM','5PM']
+const workingHoursDisplayedOnWebsite = ['9AM', '10AM','11AM','12PM','1PM','2PM','3PM','4PM','5PM']
 const tableContainer = $(".container");
 let individualRow;
 
 
 //creating the grid system on the programmatically.
 $(document).ready(function(){
-for(workingHour of workingHours)
+for(workingHourDisplayedOnWebsite of workingHoursDisplayedOnWebsite)
 {
   individualRow = "<div class= 'row time-block'>"
-  individualRow+="<div class='col-md-1 hour' id='hour'>"+"<strong>"+workingHour+"</strong>"+"</div>";                  
+  individualRow+="<div class='col-md-1 hour' id='hour'>"+"<strong>"+workingHourDisplayedOnWebsite+"</strong>"+"</div>";                  
   individualRow+="<textarea class='col-md-10 description blockrow'>"+"</textarea>";
   individualRow+="<button class='col-md-1 btn saveBtn'>"+"<i class='fas fa-save i:hover'>"+"</i>"+"</button>";
   individualRow+="</div>"
   tableContainer.append(individualRow);
-  setBackgroundColour(workingHour);
+  setBackGroundTaskColor();
 }
 
-
-//need to find better ways of doing time comparison
-function setBackgroundColour(workingHour){
-  let allMyRows = $(".blockrow");
-  let timeSupplied;
-  switch(workingHour)
-  {
+function setBackGroundTaskColor()
+{
+  let allMyRows = $(".description");
+  for(eachRow of allMyRows){
+  let taskTimeOnWebSite = $(eachRow).siblings("#hour").text();
+   switch(taskTimeOnWebSite)
+   { 
     case "9AM":
-      timeSupplied = '09:00';
+      startTimeSupplied = '09:00:00';
+      endTimeRange = '09:59:59';
       break;
 
-    case "10AM":
-      timeSupplied = '10:00';
+     case "10AM":
+      startTimeSupplied = '10:00:00';
+      endTimeRange = '10:59:59';
       break;
 
     case "11AM":
-      timeSupplied = '11:00';
+      startTimeSupplied = '11:00:00';
+      endTimeRange = '11:59:59';
       break;
     
     case "12PM":
-      timeSupplied = '12:00';
+      startTimeSupplied = '12:00:00';
+      endTimeRange = '12:59:59';
       break;
 
     case "1PM":
-      timeSupplied = '01:00';
+      startTimeSupplied = '13:00:00';
+      endTimeRange = '13:59:59';
       break;
 
     case "2PM":
-      timeSupplied = '02:00';
+      startTimeSupplied = '14:00:00';
+      endTimeRange = '14:59:59';
       break;
 
     case "3PM":
-      timeSupplied = '03:00';
+      startTimeSupplied = '15:00:00';
+      endTimeRange = '15:59:59';
       break;
 
     case "4PM":
-      timeSupplied = '04:00';
+      startTimeSupplied = '16:00:00';
+      endTimeRange = '16:59:59';
       break;
 
       case "5PM":
-        timeSupplied = '05:00';
+        startTimeSupplied = '17:00:00';
+        endTimeRange = '17:59:59';
         break;
-   
-    default:
-      console.log("Oops no matching time in the switch case!!")
-      break;
-  }
-  for(eachRow of allMyRows)
-  {
-     let timeNowAfterConvertion = moment().valueOf();
-     let workingHourAfterConversion = moment(timeSupplied, 'hh:mm').valueOf();
-     if(timeNowAfterConvertion > workingHourAfterConversion){
-        $(eachRow).addClass("past");
-     }else if(timeNowAfterConvertion === workingHourAfterConversion){
+
+      default:
+        console.log("Oops no matching time in the switch case!!")
+        break;
+   }
+   let startTimeHour = moment(startTimeSupplied, 'HH:mm:ss');
+   let endTimeHour = moment(endTimeRange, 'HH:mm:ss');
+   let getCurrentTime = moment().format('HH:mm:ss');
+   let checkCurrentTime = moment(getCurrentTime, 'HH:mm:ss');  
+   //console.log("***START TIME***",startTimeHour);
+   //console.log("^^^END TIME^^^", endTimeHour);
+   //console.log("&&&&&Current time&&&&", checkCurrentTime);
+   if(moment(checkCurrentTime).isBefore(startTimeHour))
+   {
+    $(eachRow).removeClass("past");
+    $(eachRow).removeClass("present");
+    $(eachRow).addClass("future");
+   }else if(moment(checkCurrentTime).isBetween(startTimeHour, endTimeHour)){
       $(eachRow).removeClass("past");
       $(eachRow).addClass("present");
-     }else {
-      $(eachRow).removeClass("past");
-      $(eachRow).removeClass("present");
-      $(eachRow).addClass("future");
-     }
-  } 
-  
+   }else if(moment(checkCurrentTime).isAfter(endTimeHour)){
+     $(eachRow).addClass("past"); 
+   }
+   else{
+     console.log("OOOOOoooooooooops an error occur. No time within the time specified.")
+   }
+  }
 }
 
 //onclick event for saving the inputted task.
- $(".saveBtn").on("click", function(){
-      let currentRowInScope = $(this).siblings(".description");
-      let data = $(currentRowInScope).val();
-      let keyValue = $(this).siblings(".description").siblings("#hour").text();
-      keyValue = keyValue+="Task";
-      console.log("My key", keyValue, currentRowInScope, data)
-      localStorage.setItem(keyValue, data);
- });
- 
- //calling data persist function.
- dataPersist();
+$(".saveBtn").on("click", function(){
+  let currentRowInScope = $(this).siblings(".description");
+  let data = $(currentRowInScope).val();
+  let keyValue = $(this).siblings(".description").siblings("#hour").text();
+  keyValue = keyValue+="Task";
+  console.log("My key", keyValue, currentRowInScope, data)
+  localStorage.setItem(keyValue, data);
+});
 
 
+//calling data persist function.
+dataPersist();
 
  //function to persist data.
-function dataPersist(){
+ function dataPersist(){
   let AllRowsInScope = $(".description");
   for(rowInScope of AllRowsInScope)
   {
@@ -115,3 +129,119 @@ function dataPersist(){
   }
 }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+//I have implemented a better way for time comparison so function is now obsolete.
+//need to find better ways of doing time comparison
+function setBackgroundColour(workingHourDisplayedOnWebsite){
+  //setBackGroundTaskColor();
+  let allMyRows = $(".blockrow");
+  let startTimeSupplied;
+  let endTimeRange;
+  switch(workingHourDisplayedOnWebsite)
+  {
+    case "9AM":
+      startTimeSupplied = '09:00:00';
+      endTimeRange = '09:59:59';
+      break;
+
+    case "10AM":
+      startTimeSupplied = '10:00:00';
+      endTimeRange = '10:59:59';
+      break;
+
+    case "11AM":
+      startTimeSupplied = '11:00:00';
+      endTimeRange = '11:59:59';
+      break;
+    
+    case "12PM":
+      startTimeSupplied = '12:00:00';
+      endTimeRange = '12:59:59';
+      break;
+
+    case "1PM":
+      startTimeSupplied = '01:00:00';
+      endTimeRange = '01:59:59';
+      break;
+
+    case "2PM":
+      startTimeSupplied = '02:00:00';
+      endTimeRange = '02:59:59';
+      break;
+
+    case "3PM":
+      startTimeSupplied = '03:00:00';
+      endTimeRange = '03:59:59';
+      break;
+
+    case "4PM":
+      startTimeSupplied = '04:00:00';
+      endTimeRange = '04:59:59';
+      break;
+
+      case "5PM":
+        startTimeSupplied = '05:00:00';
+        endTimeRange = '05:59:59';
+        break;
+   
+    default:
+      console.log("Oops no matching time in the switch case!!")
+      break;
+  }
+  for(eachRow of allMyRows)
+  {
+     let timeNowAfterConvertion = moment().valueOf();
+     let workingHourAfterConversion = moment(startTimeSupplied, 'hh:mm:ss').valueOf();
+     if(timeNowAfterConvertion > workingHourAfterConversion){
+        $(eachRow).addClass("past");
+     }else if(timeNowAfterConvertion === workingHourAfterConversion){
+      $(eachRow).removeClass("past");
+      $(eachRow).addClass("present");
+     }else {
+      $(eachRow).removeClass("past");
+      $(eachRow).removeClass("present");
+      $(eachRow).addClass("future");
+     }
+  } 
+  
+}
+*/

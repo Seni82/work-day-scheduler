@@ -48,12 +48,12 @@ textarea{
 
 .past {
   background-color: #d3d3d3;
-  color: red;
+  color: black;
 }
 
 .present {
   background-color: #ff6961;
-  color: green;
+  color: black;
 }
 
 .future {
