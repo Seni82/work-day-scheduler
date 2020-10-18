@@ -29,6 +29,15 @@ The website can be found at the following address: https://seni82.github.io/work
 !["Main Website Page"](./Screenshots/mainPage.jpg?raw=true  "Website Main Page.")
 
 
+# MomwntJs
+I have used the following momentjs functions for time comparison :
+  - isBefore();
+  - isBetween();
+  - isAfter();
+  
+  This functions give a more concise comparison of time state and used that to determine the time block colour displayed.
+  
+  See [momenjs docs](https://momentjs.com/docs/) for reference. 
 
 # Previous Issues:
 I am not pleased yet with the time comparison as I believe there are better ways of doing the time comparison. (I will look into improving this.)
@@ -42,5 +51,5 @@ No longer have any issues as issues identified with time comparison has now been
    - VSCode.
    - JQuery.
    - Css / Html.
-
-
+   - BootStrap.
+   - JavaScript.
