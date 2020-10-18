@@ -77,9 +77,6 @@ function setBackGroundTaskColor()
    let endTimeHour = moment(endTimeRange, 'HH:mm:ss');
    let getCurrentTime = moment().format('HH:mm:ss');
    let checkCurrentTime = moment(getCurrentTime, 'HH:mm:ss');  
-   //console.log("***START TIME***",startTimeHour);
-   //console.log("^^^END TIME^^^", endTimeHour);
-   //console.log("&&&&&Current time&&&&", checkCurrentTime);
    if(moment(checkCurrentTime).isBefore(startTimeHour))
    {
     $(eachRow).removeClass("past");
