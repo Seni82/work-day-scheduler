@@ -1,8 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@1&display=swap');
+
 body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  line-height: 1;
-}
+    font-family: 'Baskervville', serif;
+    font-size: 17px;
+    line-height: 1;
+    background-color: azure;
+  }
+  
+  h1 {
+    color: #4870a8;
+  }
+
+
+  p {
+    color: #657fa4;
+  }
 
 textarea{
   background: transparent;
