@@ -38,3 +38,9 @@ I am not pleased yet with the time comparison as I believe there are better ways
 No longer have any issues as issues identified with time comparison has now been fixed.
 
 
+# Technology used:
+   - VSCode.
+   - JQuery.
+   - Css / Html.
+
+
