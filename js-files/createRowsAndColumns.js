@@ -79,14 +79,11 @@ function setBackGroundTaskColor()
    let checkCurrentTime = moment(getCurrentTime, 'HH:mm:ss');  
    if(moment(checkCurrentTime).isBefore(startTimeHour))
    {
-    $(eachRow).removeClass("past");
-    $(eachRow).removeClass("present");
-    $(eachRow).addClass("future");
+    $(eachRow).addClass("future").removeClass("past present");
    }else if(moment(checkCurrentTime).isBetween(startTimeHour, endTimeHour)){
-      $(eachRow).removeClass("past");
-      $(eachRow).addClass("present");
+      $(eachRow).addClass("present").removeClass("past future");
    }else if(moment(checkCurrentTime).isAfter(endTimeHour)){
-     $(eachRow).addClass("past"); 
+     $(eachRow).addClass("past").removeClass("present future"); 
    }
    else{
      console.log("OOOOOoooooooooops an error occur. No time within the time specified.")
@@ -96,11 +93,10 @@ function setBackGroundTaskColor()
 
 //onclick event for saving the inputted task.
 $(".saveBtn").on("click", function(){
-  let currentRowInScope = $(this).siblings(".description");
-  let data = $(currentRowInScope).val();
+  let data = $(this).siblings(".description").val();
   let keyValue = $(this).siblings(".description").siblings("#hour").text();
   keyValue = keyValue+="Task";
-  console.log("My key", keyValue, currentRowInScope, data)
+  console.log("Key:",keyValue,"- value:",data)
   localStorage.setItem(keyValue, data);
 });
 
